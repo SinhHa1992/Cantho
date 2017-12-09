@@ -2,8 +2,8 @@ package com.example.ste.canthotut.Activity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -22,15 +22,17 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     private static final String TAG = "PlayMusicActivity";
 
     private TextView mSongName;
-    private Button mBtnPlay;
-    private Button mBtnStop;
+
+    private Button mBtnPause;
     private Button mBtnNext;
     private Button mBtnPrevious;
-    private SeekBar mSeekBar;
+    private SeekBar mSeekBar;                      /*song duration */
 
-    private MediaPlayer mPlayer;
-    private List<MusicObject> mListMusicObject;
-
+    private MediaPlayer mPlayer;                   /*play music*/
+    private List<MusicObject> mListMusicObject;    /*list song from ShowListMusicActivity*/
+    private int currentPosition;                   /*position when click item from ShowListMusicActivity*/
+    private Handler mHandler;
+    private Runnable mRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,25 +43,26 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         playMedia();
     }
 
+    /**
+    *   initialize SeekBar, Button & setOnClick for button
+    */
     private void initWidget() {
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSongName = (TextView) findViewById(R.id.tvSongName);
         mBtnNext = (Button) findViewById(R.id.btnNext);
-        mBtnStop = (Button) findViewById(R.id.btnStop);
+        mBtnPause = (Button) findViewById(R.id.btnPause);
         mBtnPrevious = (Button) findViewById(R.id.btnPrevious);
-        mBtnPlay = (Button) findViewById(R.id.btnPlay);
 
-        mBtnPlay.setOnClickListener(this);
         mBtnNext.setOnClickListener(this);
-        mBtnPrevious.setOnClickListener(this);
+        mBtnPause.setOnClickListener(this);
         mBtnPrevious.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnStop:
-                stopMedia();
+            case R.id.btnPause:
+                pauseMedia();
                 break;
             case R.id.btnNext:
                 playNextMedia();
@@ -70,16 +73,23 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * Auto play song when click item from ShowListMusicActivity
+     * pathSong: path from item ShowListMusicActivity
+     * nameSong: name from item ShowListMusicActivity
+     */
     private void playMedia() {
         mPlayer = new MediaPlayer();
         mListMusicObject = new ArrayList<>();
-        mListMusicObject = getIntent().getParcelableArrayListExtra(Constant.LIST_SONG_EXTRA);
-        if (mListMusicObject.size() > 0) {
-            Log.e(TAG, mListMusicObject.size() + "");
-        }
+        updateSeekbar();
+
+        currentPosition = getIntent().getIntExtra(Constant.POSITION_SONG_EXTRA, 0);
         String pathSong = getIntent().getStringExtra(Constant.PATH_SONG_EXTRA);
         String nameSong = getIntent().getStringExtra(Constant.NAME_SONG_EXTRA);
+
+        mListMusicObject = getIntent().getParcelableArrayListExtra(Constant.LIST_SONG_EXTRA);
         mSongName.setText(nameSong);
+
         mPlayer.reset();
         try {
             mPlayer.setDataSource(pathSong);
@@ -90,15 +100,94 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * play previous song
+     */
     private void playPrevious() {
-
+        mPlayer.reset();
+        mSeekBar.setProgress(0);
+        String path;
+        if (currentPosition == 0) {
+            path = mListMusicObject.get(0).getmPath();
+        } else {
+            path = mListMusicObject.get(--currentPosition).getmPath();
+        }
+        mSongName.setText(mListMusicObject.get(currentPosition).getmName());
+        try {
+            mPlayer.setDataSource(path);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * play next song
+     */
     private void playNextMedia() {
+        mPlayer.reset();
+        mSeekBar.setProgress(0);
+        String path;
+        if (currentPosition == mListMusicObject.size() - 1) {
+            path = mListMusicObject.get(mListMusicObject.size() - 1).getmPath();
+        } else {
+            path = mListMusicObject.get(++currentPosition).getmPath();
+        }
+        mSongName.setText(mListMusicObject.get(currentPosition).getmName());
 
+        try {
+            mPlayer.setDataSource(path);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void stopMedia() {
+    /**
+     * pause current song
+     */
+    private void pauseMedia() {
+        if (mPlayer.isPlaying()) {
+            mPlayer.pause();
+            mBtnPause.setText(R.string.play);
+        } else {
+            mPlayer.start();
+            mBtnPause.setText(R.string.pause);
+        }
+    }
 
+    /**
+     * Updating SeekBar progress
+     */
+    private void updateSeekbar() {
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+                float timeDuration = mPlayer.getDuration();
+                float currentDuration = mPlayer.getCurrentPosition();
+
+                float progress = (currentDuration / timeDuration) * 100;
+
+                mSeekBar.setProgress((int) progress);
+                mHandler.postDelayed(this, 100);
+            }
+        };
+        mHandler.postDelayed(mRunnable, 100);
+    }
+
+    /**
+     * clear mListMusicObject, SeekBar, MediaPlayer & Runnable
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mListMusicObject.clear();
+        mSeekBar.setProgress(0);
+        mPlayer.stop();
+        mPlayer.release();
+        mHandler.removeCallbacks(mRunnable);
     }
 }

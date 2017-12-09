@@ -63,6 +63,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.DataViewHold
             intent.putParcelableArrayListExtra(Constant.LIST_SONG_EXTRA, (ArrayList<? extends Parcelable>) mListMusic);
             intent.putExtra(Constant.PATH_SONG_EXTRA, mListMusic.get(getAdapterPosition()).getmPath());
             intent.putExtra(Constant.NAME_SONG_EXTRA, mListMusic.get(getAdapterPosition()).getmName());
+            intent.putExtra(Constant.POSITION_SONG_EXTRA, getAdapterPosition());
             view.getContext().startActivity(intent);
         }
     }
