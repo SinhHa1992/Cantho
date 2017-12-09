@@ -31,6 +31,8 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     private MediaPlayer mPlayer;                   /*play music*/
     private List<MusicObject> mListMusicObject;    /*list song from ShowListMusicActivity*/
     private int currentPosition;                   /*position when click item from ShowListMusicActivity*/
+    private Handler mHandler;
+    private Runnable mRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,9 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         playMedia();
     }
 
-    /*
+    /**
     *   initialize SeekBar, Button & setOnClick for button
-    * */
+    */
     private void initWidget() {
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSongName = (TextView) findViewById(R.id.tvSongName);
@@ -100,7 +102,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
     /**
      * play previous song
-     * */
+     */
     private void playPrevious() {
         mPlayer.reset();
         mSeekBar.setProgress(0);
@@ -122,7 +124,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
     /**
      * play next song
-     * */
+     */
     private void playNextMedia() {
         mPlayer.reset();
         mSeekBar.setProgress(0);
@@ -145,7 +147,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
     /**
      * pause current song
-     * */
+     */
     private void pauseMedia() {
         if (mPlayer.isPlaying()) {
             mPlayer.pause();
@@ -158,10 +160,10 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
     /**
      * Updating SeekBar progress
-     * */
+     */
     private void updateSeekbar() {
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
             @Override
             public void run() {
                 float timeDuration = mPlayer.getDuration();
@@ -170,16 +172,15 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
                 float progress = (currentDuration / timeDuration) * 100;
 
                 mSeekBar.setProgress((int) progress);
-                handler.postDelayed(this, 100);
+                mHandler.postDelayed(this, 100);
             }
         };
-
-        handler.postDelayed(runnable, 100);
+        mHandler.postDelayed(mRunnable, 100);
     }
 
     /**
-     * clear mListMusicObject, SeekBar & MediaPlayer
-     * */
+     * clear mListMusicObject, SeekBar, MediaPlayer & Runnable
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -187,5 +188,6 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         mSeekBar.setProgress(0);
         mPlayer.stop();
         mPlayer.release();
+        mHandler.removeCallbacks(mRunnable);
     }
 }
