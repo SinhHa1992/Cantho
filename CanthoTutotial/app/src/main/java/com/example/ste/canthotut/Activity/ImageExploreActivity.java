@@ -1,11 +1,12 @@
-package com.example.ste.canthotut.Activities;
+package com.example.ste.canthotut.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.ste.canthotut.Adapters.PictureAdapter;
+import com.example.ste.canthotut.Adapter.PictureAdapter;
+import com.example.ste.canthotut.Model.ImageModel;
 import com.example.ste.canthotut.Model.Picture;
 import com.example.ste.canthotut.R;
 
