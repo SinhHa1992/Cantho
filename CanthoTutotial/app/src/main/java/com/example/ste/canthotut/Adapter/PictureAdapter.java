@@ -1,4 +1,4 @@
-package com.example.ste.canthotut.Adapters;
+package com.example.ste.canthotut.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
