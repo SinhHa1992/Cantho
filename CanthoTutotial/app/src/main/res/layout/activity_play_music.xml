@@ -22,31 +22,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnPlay"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/play" />
-
-        <Button
-            android:id="@+id/btnStop"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/btnPause"
+            style="@style/buttonPlayMedia"
             android:text="@string/pause" />
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/buttonPlayMedia"
             android:text="@string/next" />
 
         <Button
             android:id="@+id/btnPrevious"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/buttonPlayMedia"
             android:text="@string/previous" />
     </LinearLayout>
 </LinearLayout>
