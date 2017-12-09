@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+
 import com.example.ste.canthotut.Adapters.PictureAdapter;
 import com.example.ste.canthotut.Model.Picture;
 import com.example.ste.canthotut.R;
@@ -54,7 +55,7 @@ public class ImageExploreActivity extends AppCompatActivity {
      * This function initializes the object containing the image list.
      * */
     private void initListImage() {
-        mRecyclerView = findViewById(R.id.rcv_image_gallery);
+        mRecyclerView =(RecyclerView) findViewById(R.id.rcv_image_gallery);
 
         mAdapter = new PictureAdapter(mPictures, getApplicationContext());
         mRecyclerView.setHasFixedSize(true);

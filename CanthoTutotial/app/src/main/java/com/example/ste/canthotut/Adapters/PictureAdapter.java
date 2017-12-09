@@ -51,8 +51,8 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
         private ImageView mImg;
         public ViewHolder(View view) {
             super(view);
-            mTitle = view.findViewById(R.id.title);
-            mImg =  view.findViewById(R.id.img);
+            mTitle = (TextView) view.findViewById(R.id.title);
+            mImg = (ImageView) view.findViewById(R.id.img);
         }
     }
 }
