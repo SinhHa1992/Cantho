@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CanthoTut</string>
+    <string name="label_audio">File audio:</string>
+    <string name="label_image">File image:</string>
 </resources>
