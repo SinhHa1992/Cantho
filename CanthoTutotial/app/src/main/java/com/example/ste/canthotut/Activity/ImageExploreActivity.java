@@ -6,7 +6,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.ste.canthotut.Adapter.PictureAdapter;
-import com.example.ste.canthotut.Model.ImageModel;
 import com.example.ste.canthotut.Model.Picture;
 import com.example.ste.canthotut.R;
 
