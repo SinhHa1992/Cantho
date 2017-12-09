@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.example.ste.canthotut.Adapter.MusicAdapter;
 import com.example.ste.canthotut.Constans.Constant;
-import com.example.ste.canthotut.Object.MusicObject;
+import com.example.ste.canthotut.Model.MusicObject;
 import com.example.ste.canthotut.R;
 
 import java.io.File;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.ste.canthotut.Activity.PlayMusicActivity;
 import com.example.ste.canthotut.Constans.Constant;
-import com.example.ste.canthotut.Object.MusicObject;
+import com.example.ste.canthotut.Model.MusicObject;
 import com.example.ste.canthotut.R;
 
 import java.util.List;
