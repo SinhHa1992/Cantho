@@ -1,6 +1,5 @@
 package com.example.ste.canthotut.Adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.ste.canthotut.Object.MusicObject;
 import com.example.ste.canthotut.Activity.PlayMusicActivity;
+import com.example.ste.canthotut.Constans.Constant;
+import com.example.ste.canthotut.Object.MusicObject;
 import com.example.ste.canthotut.R;
 
 import java.util.List;
@@ -21,11 +21,9 @@ import java.util.List;
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.DataViewHolder> {
 
     private List<MusicObject> mListMusic;
-    private Context mContext;
 
-    public MusicAdapter(List<MusicObject> mListMusic, Context mContext) {
+    public MusicAdapter(List<MusicObject> mListMusic) {
         this.mListMusic = mListMusic;
-        this.mContext = mContext;
     }
 
     @Override
@@ -53,11 +51,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.DataViewHold
             itemView.setOnClickListener(this);
         }
 
+        /*
+        * onClick send pathSong and nameSong from ShowListMusicActivity to PlayMusicActivity
+        * */
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), PlayMusicActivity.class);
-            intent.putExtra("pathSong", mListMusic.get(getAdapterPosition()).getmPath());
-            intent.putExtra("nameSong", mListMusic.get(getAdapterPosition()).getmName());
+            intent.putExtra(Constant.PATH_SONG_EXTRA, mListMusic.get(getAdapterPosition()).getmPath());
+            intent.putExtra(Constant.NAME_SONG_EXTRA, mListMusic.get(getAdapterPosition()).getmName());
             view.getContext().startActivity(intent);
         }
     }

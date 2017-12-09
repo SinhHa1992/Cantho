@@ -1,13 +1,13 @@
 package com.example.ste.canthotut.Activity;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.ste.canthotut.Adapter.MusicAdapter;
+import com.example.ste.canthotut.Constans.Constant;
 import com.example.ste.canthotut.Object.MusicObject;
 import com.example.ste.canthotut.R;
 
@@ -18,13 +18,11 @@ import java.util.List;
 
 public class ShowListMusicActivity extends AppCompatActivity {
 
-    private static final String PATH = Environment.getExternalStorageDirectory() + "/" + "Music";
-    public static final String PATH_EXTRA = "pathSong";
+    private static final String TAG = "ShowListMusicActivity";
 
-
-    private RecyclerView mListSong;
-    private List<MusicObject> mListDataMusic;
-    private MusicAdapter mAdapterMusic;
+    private RecyclerView mListSong;             /*Recycler View show list song*/
+    private List<MusicObject> mListDataMusic;   /*list music read from SD Card*/
+    private MusicAdapter mAdapterMusic;         /*adapter show list music*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +35,7 @@ public class ShowListMusicActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         mListSong = (RecyclerView) findViewById(R.id.rvSong);
         mListDataMusic = new ArrayList<>();
-        mAdapterMusic = new MusicAdapter(mListDataMusic, this);
+        mAdapterMusic = new MusicAdapter(mListDataMusic);
 
         getFileMP3();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -46,19 +44,22 @@ public class ShowListMusicActivity extends AppCompatActivity {
     }
 
     private void getFileMP3() {
-        File home = new File(PATH);
+        File home = new File(Constant.DIRECTORY_MUSIC_PATH);
         if (home.listFiles(new FileExtensionFilter()) != null &&
                 home.listFiles(new FileExtensionFilter()).length > 0) {
             for (File file : home.listFiles(new FileExtensionFilter())) {
                 mListDataMusic.add(new MusicObject(file.getName(), file.getPath()));
-                Log.e("logg", file.getName());
+                Log.e(TAG, file.getName());
             }
         }
     }
 
+    /*
+    * Fill all file mp3 from SD Card
+    * */
     private class FileExtensionFilter implements FilenameFilter {
         public boolean accept(File dir, String name) {
-            return (name.endsWith(".mp3") || name.endsWith(".MP3"));
+            return (name.endsWith(Constant.FILLER_FILE));
         }
     }
 }
