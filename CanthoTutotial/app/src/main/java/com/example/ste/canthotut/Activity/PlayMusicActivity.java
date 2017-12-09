@@ -1,29 +1,24 @@
 package com.example.ste.canthotut.Activity;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
-import android.widget.MediaController;
+import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.VideoView;
 
-import com.example.ste.canthotut.Constans.Constant;
 import com.example.ste.canthotut.R;
 
-public class PlayMusicActivity extends AppCompatActivity {
+public class PlayMusicActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "PlayMusicActivity";
 
-    private VideoView mViewPlayMusic;
-    private MediaController mMediaControl;
-
     private TextView mSongName;
     private Button mBtnPlay;
-    private Button mBtnPause;
+    private Button mBtnStop;
     private Button mBtnNext;
     private Button mBtnPrevious;
+    private SeekBar mSeekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,32 +26,53 @@ public class PlayMusicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_music);
 
         initWidget();
-        setUpVideoView();
     }
 
     private void initWidget() {
-        mViewPlayMusic = (VideoView) findViewById(R.id.vvMusic);
+        mSeekBar = (SeekBar) findViewById(R.id.seekBar);
+        mSongName = (TextView) findViewById(R.id.tvSongName);
+        mBtnNext = (Button) findViewById(R.id.btnNext);
+        mBtnStop = (Button) findViewById(R.id.btnStop);
+        mBtnPrevious = (Button) findViewById(R.id.btnPrevious);
+        mBtnPlay = (Button) findViewById(R.id.btnPlay);
+
+        mBtnPlay.setOnClickListener(this);
+        mBtnNext.setOnClickListener(this);
+        mBtnPrevious.setOnClickListener(this);
+        mBtnPrevious.setOnClickListener(this);
     }
 
-    private void setUpVideoView() {
-        mMediaControl = new MediaController(this);
-        mMediaControl.setMediaPlayer(mViewPlayMusic);
-        mViewPlayMusic.setMediaController(mMediaControl);
-
-        String path = getIntent().getStringExtra(Constant.PATH_SONG_EXTRA);
-        Log.e(TAG, path);
-
-        if (path != null) {
-            mViewPlayMusic.setVideoPath(path);
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnPlay:
+                playMedia();
+                break;
+            case R.id.btnStop:
+                stopMedia();
+                break;
+            case R.id.btnNext:
+                playNextMedia();
+                break;
+            case R.id.btnPrevious:
+                playPrevious();
+                break;
         }
+    }
 
-        mViewPlayMusic.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mViewPlayMusic.start();
-                mediaPlayer.start();
-                mMediaControl.show();
-            }
-        });
+    private void playMedia() {
+
+    }
+
+    private void playPrevious() {
+
+    }
+
+    private void playNextMedia() {
+
+    }
+
+    private void stopMedia() {
+
     }
 }

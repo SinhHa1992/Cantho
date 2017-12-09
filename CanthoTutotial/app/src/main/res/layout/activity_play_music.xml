@@ -6,11 +6,6 @@
     android:orientation="vertical"
     tools:context="com.example.ste.canthotut.Activity.PlayMusicActivity">
 
-    <VideoView
-        android:id="@+id/vvMusic"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <TextView
         android:id="@+id/tvSongName"
         android:layout_width="match_parent"
