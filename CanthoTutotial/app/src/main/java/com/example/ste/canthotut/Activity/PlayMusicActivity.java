@@ -4,19 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.example.ste.canthotut.R;
 
 public class PlayMusicActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "PlayMusicActivity";
-
-    private VideoView mViewPlayMusic;
-    private MediaController mMediaControl;
 
     private TextView mSongName;
     private Button mBtnPlay;
@@ -46,7 +41,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         mBtnPrevious.setOnClickListener(this);
         mBtnPrevious.setOnClickListener(this);
     }
-    
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
