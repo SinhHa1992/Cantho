@@ -35,9 +35,9 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(PictureAdapter.ViewHolder holder, int position) {
-        holder.mTitle.setText(mGallerys.get(position).getImage_title());
+        holder.mTitle.setText(mGallerys.get(position).getmTitles());
         holder.mImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        holder.mImg.setImageResource((mGallerys.get(position).getImage_ID()));
+        holder.mImg.setImageResource((mGallerys.get(position).getmImageId()));
 
     }
 

@@ -10,6 +10,14 @@ public class Picture {
     private String  mTitles;
     private Integer mImageId;
 
+    public String getmTitles() {
+        return mTitles;
+    }
+
+    public Integer getmImageId() {
+        return mImageId;
+    }
+
     public void setmTitles(String mTitles) {
         this.mTitles = mTitles;
     }
