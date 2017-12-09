@@ -29,7 +29,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
 
     @Override
     public PictureAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cell_gallary, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_cell_gallary, parent, false);
         return new ViewHolder(view);
     }
 
@@ -51,8 +51,8 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
         private ImageView mImg;
         public ViewHolder(View view) {
             super(view);
-            mTitle = (TextView)view.findViewById(R.id.title);
-            mImg = (ImageView) view.findViewById(R.id.img);
+            mTitle = view.findViewById(R.id.title);
+            mImg =  view.findViewById(R.id.img);
         }
     }
 }

@@ -37,11 +37,16 @@ public class ImageExploreActivity extends AppCompatActivity {
             R.drawable.img7,
             R.drawable.img8,
     };
+    private ArrayList<Picture> mPictures;
+    private PictureAdapter mAdapter;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_explore);
+
+        prepareData();
         initListImage();
     }
 
@@ -49,29 +54,26 @@ public class ImageExploreActivity extends AppCompatActivity {
      * This function initializes the object containing the image list.
      * */
     private void initListImage() {
-        ArrayList<Picture> pictures = prepareData();
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rcv_image_gallery);
-        PictureAdapter adapter = new PictureAdapter(pictures, getApplicationContext());
+        mRecyclerView = findViewById(R.id.rcv_image_gallery);
 
-        recyclerView.setHasFixedSize(true);
+        mAdapter = new PictureAdapter(mPictures, getApplicationContext());
+        mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     /**
      * This function prepare date for picture list.
      * */
-    private ArrayList<Picture> prepareData() {
-        ArrayList<Picture> theimage = new ArrayList<>();
-
+    private void prepareData() {
+        mPictures = new ArrayList<>();
+        Picture createList = new Picture();
         for (int i = 0; i < mTitles.length; i++) {
-            Picture createList = new Picture();
             createList.setmTitles(mTitles[i]);
             createList.setmImageId(mImageList[i]);
-            theimage.add(createList);
+            mPictures.add(createList);
         }
-        return theimage;
     }
 
 }
