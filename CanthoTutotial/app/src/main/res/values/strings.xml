@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">CanthoTut</string>
-    <string name="label_audio">File audio:</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+	<string name="label_audio">File audio:</string>
     <string name="label_image">File image:</string>
 </resources>
