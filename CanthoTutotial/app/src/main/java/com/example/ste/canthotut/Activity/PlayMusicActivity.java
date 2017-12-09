@@ -3,7 +3,6 @@ package com.example.ste.canthotut.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -30,7 +29,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
     private MediaPlayer mPlayer;
     private List<MusicObject> mListMusicObject;
-
+    private int currentPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +69,21 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * auto play video
+     */
+
     private void playMedia() {
         mPlayer = new MediaPlayer();
         mListMusicObject = new ArrayList<>();
-        mListMusicObject = getIntent().getParcelableArrayListExtra(Constant.LIST_SONG_EXTRA);
-        if (mListMusicObject.size() > 0) {
-            Log.e(TAG, mListMusicObject.size() + "");
-        }
+
+        currentPosition = getIntent().getIntExtra(Constant.POSITION_SONG_EXTRA, 0);
         String pathSong = getIntent().getStringExtra(Constant.PATH_SONG_EXTRA);
         String nameSong = getIntent().getStringExtra(Constant.NAME_SONG_EXTRA);
+
+        mListMusicObject = getIntent().getParcelableArrayListExtra(Constant.LIST_SONG_EXTRA);
         mSongName.setText(nameSong);
+
         mPlayer.reset();
         try {
             mPlayer.setDataSource(pathSong);
@@ -91,14 +95,43 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void playPrevious() {
-
+        mPlayer.reset();
+        String path;
+        if (currentPosition == 0) {
+            path = mListMusicObject.get(0).getmPath();
+        } else {
+            path = mListMusicObject.get(--currentPosition).getmPath();
+        }
+        
+        try {
+            mPlayer.setDataSource(path);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void playNextMedia() {
+        mPlayer.reset();
+        String path;
+        if (currentPosition == mListMusicObject.size() - 1) {
+            path = mListMusicObject.get(mListMusicObject.size() - 1).getmPath();
+        } else {
 
+            path = mListMusicObject.get(++currentPosition).getmPath();
+        }
+
+        try {
+            mPlayer.setDataSource(path);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void stopMedia() {
-
+        mPlayer.stop();
     }
 }
