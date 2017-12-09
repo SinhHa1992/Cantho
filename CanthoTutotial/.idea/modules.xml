@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CanthoTutotial.iml" filepath="$PROJECT_DIR$/CanthoTutotial.iml" />
+      <module fileurl="file://C:\Users\phamh\Documents\GitHub\Cantho\CanthoTutotial\CanthoTutotial.iml" filepath="C:\Users\phamh\Documents\GitHub\Cantho\CanthoTutotial\CanthoTutotial.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\phamh\Documents\GitHub\Cantho\CanthoTutotial\app\app.iml" filepath="C:\Users\phamh\Documents\GitHub\Cantho\CanthoTutotial\app\app.iml" />
     </modules>
   </component>
 </project>
