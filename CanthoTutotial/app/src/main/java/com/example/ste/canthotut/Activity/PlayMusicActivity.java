@@ -21,7 +21,6 @@ public class PlayMusicActivity extends AppCompatActivity {
 
         initWidget();
         setUpVideoView();
-
     }
 
     private void initWidget() {
@@ -32,7 +31,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         mMediaControl = new MediaController(this);
         mMediaControl.setMediaPlayer(mViewPlayMusic);
         mViewPlayMusic.setMediaController(mMediaControl);
-        String path = getIntent().getStringExtra("pathSong");
+        String path = getIntent().getStringExtra(ShowListMusicActivity.PATH_EXTRA);
         Log.e("logg", path);
         if (path != null) {
             mViewPlayMusic.setVideoPath(path);
@@ -46,6 +45,5 @@ public class PlayMusicActivity extends AppCompatActivity {
                 mMediaControl.show();
             }
         });
-
     }
 }

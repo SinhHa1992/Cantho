@@ -19,6 +19,9 @@ import java.util.List;
 public class ShowListMusicActivity extends AppCompatActivity {
 
     private static final String PATH = Environment.getExternalStorageDirectory() + "/" + "Music";
+    public static final String PATH_EXTRA = "pathSong";
+
+
     private RecyclerView mListSong;
     private List<MusicObject> mListDataMusic;
     private MusicAdapter mAdapterMusic;
