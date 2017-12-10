@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.ste.canthotut.Model.SpacePhotoModel;
 import com.example.ste.canthotut.R;
 
@@ -40,10 +41,7 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
     @Override
     public void onBindViewHolder(ImageGalleryAdapter.MyViewHolder holder, int position) {
         SpacePhotoModel spacePhoto = mSpacePhotos[position];
-        ImageView imageView = holder.mPhotoImageView;
-        Glide.with(mContext)
-                .load(spacePhoto.getUrl())
-                .placeholder(R.drawable.ic_file_download_black_24dp).into(imageView);
+        holder.bind(spacePhoto);
     }
 
     @Override
@@ -52,12 +50,21 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView mPhotoImageView;
+        private ImageView mPhotoImageView;
 
-        public MyViewHolder(View itemView) {
+        private MyViewHolder(View itemView) {
             super(itemView);
             mPhotoImageView = (ImageView) itemView.findViewById(R.id.iv_photo);
             itemView.setOnClickListener(this);
+        }
+
+        private void bind(SpacePhotoModel spacePhoto){
+            Glide.with(mContext)
+                    .load(spacePhoto.getUrl())
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .placeholder(R.drawable.ic_file_download_black_24dp).into(mPhotoImageView);
+
         }
 
         @Override
