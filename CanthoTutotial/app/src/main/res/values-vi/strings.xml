@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_audio">Âm thanh:</string>
+    <string name="label_image">Hình ảnh:</string>
+    <string name="pause">Dừng</string>
+    <string name="next">Tiếp theo</string>
+    <string name="previous">Trước</string>
+    <string name="play">Phát</string>
+</resources>

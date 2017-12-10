@@ -12,5 +12,6 @@ public class Constant {
     public static final String POSITION_SONG_EXTRA = "positionSong";
     public static final String LIST_SONG_EXTRA = "listSong";
     public static final String DIRECTORY_MUSIC_PATH = Environment.getExternalStorageDirectory() + "/" + "Music";
+    public static final String DIRECTORY_PICTURE_PATH = Environment.getExternalStorageDirectory() + "/" + "Picture/";
     public static final String FILLER_FILE = ".mp3";
 }

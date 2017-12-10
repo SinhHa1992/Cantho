@@ -9,6 +9,23 @@ public class Picture {
 
     private String  mTitles;
     private Integer mImageId;
+    private String url;
+
+    public Picture() {
+
+    }
+
+    public Picture(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getmTitles() {
         return mTitles;

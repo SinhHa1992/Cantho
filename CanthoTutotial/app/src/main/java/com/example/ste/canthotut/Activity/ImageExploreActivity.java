@@ -1,7 +1,7 @@
 package com.example.ste.canthotut.Activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -48,6 +48,7 @@ public class ImageExploreActivity extends AppCompatActivity {
 
         prepareData();
         initListImage();
+        onTouchRecyclerView();
     }
 
     /**
@@ -76,4 +77,26 @@ public class ImageExploreActivity extends AppCompatActivity {
         }
     }
 
+   
+    private void onTouchRecyclerView(){
+
+        /*mRecyclerView.OnItemTouchListener(new RecyclerView.OnItemTouchListener(){
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });*/
+    }
+    
 }

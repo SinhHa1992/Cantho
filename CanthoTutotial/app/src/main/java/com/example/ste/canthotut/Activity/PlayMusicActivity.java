@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -13,6 +14,7 @@ import com.example.ste.canthotut.Constant.Constant;
 import com.example.ste.canthotut.Model.MusicObject;
 import com.example.ste.canthotut.R;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,15 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
         initWidget();
         playMedia();
+
+        File myFolder = getDir("files", MODE_PRIVATE);
+       // Log.e(TAG, getFilesDir().getPath());
+        Log.e(TAG, getFilesDir().getAbsolutePath());
+
+        File lis = myFolder.getAbsoluteFile();
+        for (String list : lis.list()){
+            Log.e(TAG, lis.getPath());
+        }
     }
 
     /**
@@ -189,5 +200,6 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         mPlayer.stop();
         mPlayer.release();
         mHandler.removeCallbacks(mRunnable);
+
     }
 }

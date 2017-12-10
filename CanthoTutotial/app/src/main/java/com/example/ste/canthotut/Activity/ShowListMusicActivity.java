@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.ste.canthotut.Adapter.MusicAdapter;
 import com.example.ste.canthotut.Constant.Constant;
@@ -13,6 +12,7 @@ import com.example.ste.canthotut.R;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +30,13 @@ public class ShowListMusicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_list_music);
 
         setupRecyclerView();
+
+        File resolveMe = new File("/data/data/com.example.ste.canthotut/files/ooo.txt");
+        try {
+            resolveMe.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupRecyclerView() {
@@ -49,7 +56,6 @@ public class ShowListMusicActivity extends AppCompatActivity {
                 home.listFiles(new FileExtensionFilter()).length > 0) {
             for (File file : home.listFiles(new FileExtensionFilter())) {
                 mListDataMusic.add(new MusicObject(file.getName(), file.getPath()));
-                Log.e(TAG, file.getName());
             }
         }
     }
